@@ -39,7 +39,7 @@ Then you need to install the requirements
 
 #### _**Login/Register/Logout**_
 
-  - You can do basic User interactions
+    - You can do basic User interactions
 
 ##### _**Add Potion**_
 
