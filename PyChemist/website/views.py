@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
-from .models import Potion, Ingredient
+from .models import Potion, Ingredient, Recipe
 from .forms import SignUpForm, AddPotionForm
 
 
@@ -69,4 +69,21 @@ def show_potion(request):
 def brew_potion(request, potion_id):
     potion_to_brew = Potion.objects.get(pk=potion_id)
     ingredients = Ingredient.objects.all()
-    return render(request, 'brew_potion.html', {"ingredients":ingredients})
+    return render(request, 'brew_potion.html', {"ingredients": ingredients, "potion": potion_to_brew})
+
+
+def add_ingredient_to_potion(request, potion_id, ingredient_id):
+    ingredient = Ingredient.objects.get(pk=ingredient_id)
+    potion = Potion.objects.get(pk=potion_id)
+    if potion.can_add_ingredients():
+        potion.add_ingredient(ingredient)
+        if potion.ready_to_check_for_recipe():
+            potion_ingredients = list(potion.ingredients.all())
+            matching_recipes = Recipe.objects.filter(ingredients__in=potion_ingredients)
+            if matching_recipes.exists():
+                potion = matching_recipes
+                potion.save()
+    else:
+        messages.success(request, "Potion already Done!")
+    return redirect('brew_potion', potion_id=potion_id)
+

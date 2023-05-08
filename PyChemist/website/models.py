@@ -25,6 +25,10 @@ class Recipe(models.Model):
         blank=True,
     )
 
+    def add_ingredient(self, ingredient):
+        if self.ingredients.count() < MAXIMUM_AMOUNT_OF_INGREDIENT:
+            self.ingredients.add(ingredient)
+
 
 class Potion(models.Model):
     id = models.AutoField(primary_key=True)
@@ -47,9 +51,12 @@ class Potion(models.Model):
         blank=True,
     )
 
+    def can_add_ingredients(self):
+        return self.ingredients.count() < MAXIMUM_AMOUNT_OF_INGREDIENT
+
     def add_ingredient(self, ingredient):
-        if self.ingredients.count() < 5:
-            if self.ingredients.count() == 4:
-                # run your function here
-                print("The fifth ingredient has been added!")
+        if self.can_add_ingredients():
             self.ingredients.add(ingredient)
+
+    def ready_to_check_for_recipe(self):
+        return self.ingredients.count() == MAXIMUM_AMOUNT_OF_INGREDIENT

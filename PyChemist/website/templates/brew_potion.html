@@ -4,17 +4,26 @@
     <div class="col-md-6 offset-md-3">
         <h1>Brew Potion</h1>
         <br/>
-            <div class="d-flex flex-row justify-content-between bg-secondary-subtle">
-                <img src="{% static 'images/potion.webp' %}" alt="aaaa" style="width: 50%">
-                <div>
-                    <p>Ingredients</p>
-                    <div data-bs-spy="scroll">
-                        {% for ingredient in ingredients %}
-{#                            <a href="{% url 'add_ingredient' ingredient_id=ingredient.id %}">{{ ingredient.name }}</a>#}
-                        {% endfor %}
-                    </div>
+        <div class="d-flex flex-row justify-content-between bg-secondary-subtle">
+            <div>
+               <h2>Name of Potion: <b>{{ potion.name }}</b></h2>
+                <div data-bs-spy="scroll">
+                    {% for ingredient in potion.ingredients.all %}
+                        <p>{{ ingredient.name }}</p>
+                    {% endfor %}
                 </div>
             </div>
+            <div>
+                <h2>Ingredients</h2>
+                <div data-bs-spy="scroll">
+                    {% for ingredient in ingredients %}
+                        <a href="{% url 'add_ingredient_to_potion' potion_id=potion.id ingredient_id=ingredient.id %}">
+                            <p>{{ ingredient.name }}</p>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
 
     </div>
 {% endblock %}
