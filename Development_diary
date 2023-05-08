@@ -1,0 +1,47 @@
+During my previous Pet project, I didn't do a "diary" about development,
+but after I reached a point where I felt, that I'm able make a good presentation for my study group in CodeCool 
+I really  missed it. For me the most intresting thing was the way how my application and my knowledge growth.
+So I decided to do one. So here we are let's start it.
+
+***Introduction***
+
+The Idea came from one of my project from my Full Stack Developer course from CoodeCool.
+We needed to make a backend with Java/Spring Boot with database.
+This project goal was mostly to learn about the annotations in Spring Boot.
+But I really liked the challange and the system that I needed to create
+
+***Day One***
+
+I know that I want to use the Python langauage but I didn't know what kind of a framework I wanna use.
+
+After some research I found Django with bult in Security and ORM so I decided to use it for my app.
+I had some experience from one of the Module of the course that I'm currently doing.
+We builded web applications with Python, Flask server, Django templates.
+
+I searched for some video too, to gather more information about how to use Django, 
+and it was really informative. 
+I link the video if you are intrested: https://www.youtube.com/watch?v=t10QcFx7d5k&list=WL&index=29&t=5209s&ab_channel=freeCodeCamp.org
+
+With the help of the video I was able to create and understand on the basic level how the systems in Django connected
+and created the Login/Register/Logout features and some forms
+
+During this time I felt Django is very comfortable on some level compared to Spring Boot,
+but felt much easier to understand and to start useing it. The built in ORM system is more
+easier to use on my opinion
+
+***Day Two***
+
+I started to bould up the models and database relations between them.
+Because i already used Spring Boot, this part was not that challenging,
+except to figure out how to define precisly those realtions between the models.
+Instead of annotations you are defineing the field itlsef.
+
+After the database I started building up the endpoints and created the
+add_potion, brew_potions, show_potions features. Put more effort into desing.
+
+I started implementing the logic for Recipe, where if you added the fifth ingredient to the potion
+the potion is "Brewed" so you need to create a Recipe. But first I need to check if there is a Recipie
+with the same ingredients or not. If it is not, then you can name the recipie and your potion will be the original one.
+It's not finished yet because I need to research more about how to pass collections, but i'm on the right track. I think so at least. :D
+
+At this moment this "Original" attribute doesn't have any meaning but later when I will implement the Scoreing system will be helpful
