@@ -59,3 +59,8 @@ def add_potion(request):
     else:
         messages.success(request, "You must be logged in")
         return redirect('home')
+
+
+def show_potion(request):
+    potions = Potion.objects.all()
+    return render(request, 'show_potions.html', {'potions': potions})
