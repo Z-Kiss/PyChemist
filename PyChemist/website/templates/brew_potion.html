@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Brew Potion</h1>
+        <br/>
+            <div class="d-flex flex-row justify-content-between bg-secondary-subtle">
+                <img src="{% static 'images/potion.webp' %}" alt="aaaa" style="width: 50%">
+                <div>
+                    <p>Ingredients</p>
+                    <div data-bs-spy="scroll">
+                        {% for ingredient in ingredients %}
+{#                            <a href="{% url 'add_ingredient' ingredient_id=ingredient.id %}">{{ ingredient.name }}</a>#}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+    </div>
+{% endblock %}
