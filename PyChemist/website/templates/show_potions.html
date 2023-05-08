@@ -1,32 +1,49 @@
-{% extends 'base.html'  %}
+{% extends 'base.html' %}
 {% block content %}
     <div class="col-md-6 offset-md-3">
-    <h1>Potions</h1>
+        <h1>Potions</h1>
 
-    <table class="table table-striped">
-        <thead>
+        <table class="table table-striped">
+            <thead>
             <tr>
                 <td>Name</td>
                 <td>User</td>
+                <td>Original</td>
                 <td>Ingredients</td>
+                <td>Status</td>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {% for potion in potions %}
                 <tr>
                     <td>{{ potion.name }}</td>
                     <td>{{ potion.user }}</td>
                     <td>
-                        {% if potion.ingredients == ""  %}
-                            {{ potion.ingredients }}
+                        {% if potions.original == true %}
+                            Yes
                         {% else %}
-                            <a class="nav-link " aria-current="page" href="{% url 'brew_potion' potion_id=potion.id %}">Start to Brew</a>
+                            No
                         {% endif %}
+                    </td>
+                    <td>
+                        {% for ingredient in potion.ingredients.all %}
+                            <p>{{ ingredient.name }}</p>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% if potions.ingredients.all.count < 5 or not potion.ingredients.all %}
+                            <a class="nav-link " aria-current="page" href="{% url 'brew_potion' potion_id=potion.id %}">
+                                Start to Brew
+                            </a>
+                        {% else %}
+                            Already Brewed
+                        {% endif %}
+
                     </td>
                 </tr>
             {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
 
     </div>

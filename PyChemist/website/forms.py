@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Potion
+from .models import Potion, Recipe
 
 
 class SignUpForm(UserCreationForm):
@@ -42,3 +42,11 @@ class AddPotionForm(forms.ModelForm):
         model = Potion
         fields = ('name',)
 
+
+class RegisterRecipeForm(forms.ModelForm):
+    name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={
+        "placeholder": "Choose a name for your Recipe", "class": "form-control"}), label="")
+
+    class Meta:
+        model = Recipe
+        fields =('name',)

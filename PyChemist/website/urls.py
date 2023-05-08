@@ -11,4 +11,5 @@ urlpatterns = [
          views.add_ingredient_to_potion,
          name='add_ingredient_to_potion'),
     path('brew_potion/<potion_id>/', views.brew_potion, name='brew_potion'),
+    path('register_recipe/<potion_id>/', views.register_recipe, name='register_recipe'),
 ]
