@@ -1,0 +1,33 @@
+{% extends 'base.html'  %}
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+    <h1>Potions</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>User</td>
+                <td>Ingredients</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for potion in potions %}
+                <tr>
+                    <td>{{ potion.name }}</td>
+                    <td>{{ potion.user }}</td>
+                    <td>
+                        {% if potion.ingredients == ""  %}
+                            {{ potion.ingredients }}
+                        {% else %}
+                            <a class="nav-link " aria-current="page" href="{% url 'brew_potion' %}">Start to Brew</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    </div>
+{% endblock %}
