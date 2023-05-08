@@ -1,18 +1,16 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Potion
 
 
-class SignupForm(UserCreationForm):
-    name = forms.CharField(label="", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
-    password = forms.CharField(label="", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
-
+class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
-        super(SignupForm, self).__init__(self, *args, **kwargs)
+        super(SignUpForm, self).__init__(*args, **kwargs)
 
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['username'].widget.attrs['placeholder'] = 'User Name'
@@ -34,3 +32,13 @@ class SignupForm(UserCreationForm):
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as ' \
                                              'before, for verification.</small></span>'
+
+
+class AddPotionForm(forms.ModelForm):
+    name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={
+        "placeholder": "Choose a name for your Potion", "class": "form-control"}), label="")
+
+    class Meta:
+        model = Potion
+        fields = ('name',)
+
