@@ -14,25 +14,33 @@ My goal was with this project to learn more about Python and Django Framework.
 
 ### **Prerequisites**
 
-  Python
-  How to install: https://www.python.org/downloads/
+      Python
+      How to install: https://www.python.org/downloads/
 
+      PostgreSQL
+      How to install: https://www.postgresql.org/download/
 
 ### **Getting Started**
 
 Before you start, you need to create a Virtual Environment
-  - From the PyChemist directory run: "python venv venv"
+    - From the PyChemist directory run: "python venv venv"
   
 Then you need to activate it
-  - Enter the command "source venv/bin/activate" if you're on a Unix-based system
+    - Enter the command "source venv/bin/activate" if you're on a Unix-based system
     or "venv\Scripts\activate.bat" if you're on a Windows system.
   
 Then you need to install the requirements
- -  Enter the command "pip install -r requirements.txt"
+    -  Enter the command "pip install -r requirements.txt"
  
  After you are done, you can start the application
-  - Enter the command "python manage.py runserver"
+    - Enter the command "python manage.py runserver"
  
+ For the application to be able to work you need to create a database
+   - After installed the Postgresql you need to login in to it
+   - Open a Terminal and enter the command "psql -U postgres"
+   You need to use the password that you gave at the installation
+   - After you logged in you need to enter the command "create database pychemist"
+   
 
 ### **Implemented Features**
 
@@ -55,6 +63,7 @@ Then you need to install the requirements
     - You can add Ingredients to the Potion until reaching 5 of it.
       When you reach 5 ingredient your potion is done.
       
+      
     
 ### **Future plans**
 
@@ -65,4 +74,6 @@ Then you need to install the requirements
   - Add Ingridients
   - Add scoring system, to feel the accomplishment :D
   - Better design
+  - Optimalize
+  - Make code cleaner
    
