@@ -2,24 +2,24 @@
 {% block content %}
     <div class="col-md-6 offset-md-3">
         <h1>Potions</h1>
-
-        <table class="table table-striped">
+        <table class="table table-dark table-striped">
             <thead>
             <tr>
-                <td>Name</td>
-                <td>User</td>
-                <td>Original</td>
-                <td>Ingredients</td>
-                <td>Status</td>
+                <th scope="col" >Name</th>
+                <th scope="col" >User</th>
+                <th scope="col" >Original</th>
+                <th scope="col" >Ingredients</th>
+                <th scope="col" >Status</th>
+                <th scope="col">Recipe Name</th>
             </tr>
             </thead>
             <tbody>
-            {% for potion in potions %}
+            {% for potion in potions reversed %}
                 <tr>
                     <td>{{ potion.name }}</td>
                     <td>{{ potion.user }}</td>
                     <td>
-                        {% if potions.original == true %}
+                        {% if potions.original == True %}
                             Yes
                         {% else %}
                             No
@@ -38,13 +38,17 @@
                         {% else %}
                             Already Brewed
                         {% endif %}
-
+                    </td>
+                    <td>
+                        {% if potion.recipe %}
+                            {{ potion.recipe.name }}
+                            {% else %}
+                            {{ Unknown }}
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-
-
     </div>
 {% endblock %}
