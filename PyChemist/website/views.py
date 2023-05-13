@@ -45,7 +45,7 @@ def logout_user(request):
     messages.success(request, "You are logged out")
     return redirect('home')
 
-@login_required
+
 def add_potion(request):
     form = AddPotionForm(request.POST or None)
 
