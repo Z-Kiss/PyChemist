@@ -12,7 +12,28 @@ MAXIMUM_AMOUNT_OF_INGREDIENT = 5
 
 class Ingredient(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField()
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+    def __lt__(self, other):
+        return self.name < other.name
+
+    def __le__(self, other):
+        return self.name <= other.name
+
+    def __eq__(self, other):
+        return self.name == other.name
+
+    def __ne__(self, other):
+        return self.name != other.name
+
+    def __gt__(self, other):
+        return self.name > other.name
+
+    def __ge__(self, other):
+        return self.name >= other.name
 
 
 class Recipe(models.Model):
@@ -21,9 +42,11 @@ class Recipe(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     ingredients = models.ManyToManyField(
         Ingredient,
-        related_name='recipe',
         blank=True,
     )
+
+    def __str__(self):
+        return self.name
 
     def add_ingredient(self, ingredient):
         if self.ingredients.count() < MAXIMUM_AMOUNT_OF_INGREDIENT:
@@ -48,9 +71,11 @@ class Potion(models.Model):
     )
     ingredients = models.ManyToManyField(
         Ingredient,
-        related_name='potions',
         blank=True,
     )
+
+    def __str__(self):
+        return self.name
 
     def can_add_ingredients(self):
         return self.ingredients.count() < MAXIMUM_AMOUNT_OF_INGREDIENT

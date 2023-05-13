@@ -1,5 +1,4 @@
-import json
-
+from collections import Counter
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -57,24 +56,26 @@ def add_potion(request):
                 potion = Potion(name=potion_name, user=request.user)
                 potion.save()
                 messages.success(request, "Potion is created")
-                return redirect('home')
+                return redirect('show_potion')
         return render(request, 'add_potion.html', {'form': form})
     else:
         messages.success(request, "You must be logged in")
-    return redirect('home')
+        return redirect('home')
 
 
 def show_potion(request):
     if request.user.is_authenticated:
         potions = Potion.objects.all()
         return render(request, 'show_potions.html', {'potions': potions})
+    else:
+        messages.success(request, "You must be logged in")
+        return redirect('home')
 
 
 def brew_potion(request, potion_id):
     if request.user.is_authenticated:
         potion_to_brew = Potion.objects.get(pk=potion_id)
         ingredients = Ingredient.objects.all()
-
         return render(request, 'brew_potion.html', {"ingredients": ingredients, "potion": potion_to_brew})
     else:
         messages.success(request, "You must be logged in")
@@ -85,33 +86,30 @@ def add_ingredient_to_potion(request, potion_id, ingredient_id):
     if request.user.is_authenticated:
         ingredient = Ingredient.objects.get(pk=ingredient_id)
         potion = Potion.objects.get(pk=potion_id)
-
         if potion.can_add_ingredients():
             potion.add_ingredient(ingredient)
             potion.save()
-
             if potion.ready_to_check_for_recipe():
                 potion_ingredients = list(potion.ingredients.all())
                 matching_recipes = Recipe.objects.filter(ingredients__in=potion_ingredients)
-
-                if matching_recipes.exists():
-                    potion.recipe = matching_recipes
+                distinct_recipes = set(matching_recipes)
+                matching_recipe = None
+                element_counter = Counter(matching_recipes)
+                for recipe in distinct_recipes:
+                    if element_counter[recipe] == 5:
+                        matching_recipe = recipe
+                if matching_recipe:
+                    potion.recipe = matching_recipe
                     potion.save()
                     return redirect('show_potion')
-
                 else:
-                    potion.original = True
-                    potion.save()
-
                     return redirect('register_recipe', potion_id=potion_id)
-
+            return redirect('brew_potion', potion_id=potion_id)
         else:
             messages.success(request, "Potion already Done!")
-
         return redirect('brew_potion', potion_id=potion_id)
     else:
         messages.success(request, "You must be logged in")
-
     return redirect('home')
 
 
@@ -119,19 +117,22 @@ def register_recipe(request, potion_id):
     if request.user.is_authenticated:
         form = RegisterRecipeForm(request.POST or None)
         potion = Potion.objects.get(pk=potion_id)
-        ingredients = potion.ingredients
+        ingredients = list(potion.ingredients.all())
         if request.user.is_authenticated:
             if request.method == 'POST':
                 if form.is_valid():
                     recipe_name = form.cleaned_data['name']
-                    recipe = Recipe(name=recipe_name, ingredients=ingredients)
+                    recipe = Recipe(name=recipe_name)
+                    recipe.save()
+                    recipe.ingredients.set(ingredients)
                     recipe.save()
                     potion.recipe = recipe
+                    potion.original = True
                     potion.save()
                     return redirect('show_potion')
-
-            return render(request, 'register_recipe.html', {'form': form, 'ingredients': ingredients})
-
+            return render(request, 'register_recipe.html', {
+                'form': form, 'ingredients': ingredients, 'potion_id': potion_id}
+                          )
         else:
             messages.success(request, "You must be logged in")
 
