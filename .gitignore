@@ -2,3 +2,5 @@
 /PyChemist/venv/
 /PyChemist/website/migrations/
 /PyChemist/PyChemist.iml
+/PyChemist/PyChemist/__pycache__/
+/PyChemist/website/__pychache__/
