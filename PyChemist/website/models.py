@@ -12,7 +12,7 @@ MAXIMUM_AMOUNT_OF_INGREDIENT = 5
 
 class Ingredient(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField()
+    name = models.CharField(max_length=250)
 
     def __str__(self):
         return self.name
