@@ -32,14 +32,22 @@ Then you need to activate it
 Then you need to install the requirements
     -  Enter the command "pip install -r requirements.txt"
  
- After you are done, you can start the application
-    - Enter the command "python manage.py runserver"
- 
- For the application to be able to work you need to create a database
-   - After installed the Postgresql you need to login in to it
+For the application to be able to work you need to create a database
+   - After installed the Postgresql you need to log in
    - Open a Terminal and enter the command "psql -U postgres"
    You need to use the password that you gave at the installation
    - After you logged in you need to enter the command "create database pychemist"
+
+At this state of the application
+you need to migrate the database relations that we defined in the model.py
+    - From the PyChemist directory enter this commands
+    - python manage.py makemigrations
+    - python manage.py migrate
+
+After you are done, you can start the application
+    - Enter the command "python manage.py runserver"
+
+
    
 
 ### **Implemented Features**
