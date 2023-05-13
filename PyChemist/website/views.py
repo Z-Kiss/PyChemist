@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 from .models import Potion, Ingredient, Recipe
-from .forms import SignUpForm, AddPotionForm, RegisterRecipeForm
+from .forms import SignUpForm, AddPotionForm, RegisterRecipeForm, AddIngredientForm
 
 
 def home(request):
@@ -45,7 +45,7 @@ def logout_user(request):
     messages.success(request, "You are logged out")
     return redirect('home')
 
-
+@login_required
 def add_potion(request):
     form = AddPotionForm(request.POST or None)
 
@@ -63,10 +63,37 @@ def add_potion(request):
         return redirect('home')
 
 
+def add_ingredient(request):
+    form = AddIngredientForm(request.POST or None)
+
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if form.is_valid():
+                ingredient_name = form.cleaned_data['name']
+                ingredient = Ingredient(name=ingredient_name)
+                ingredient.save()
+                messages.success(request, "Ingredient is added")
+                return redirect('home')
+        else:
+            return render(request, 'add_ingredient.html', {'form': form})
+    else:
+        messages.success(request, "You must be logged in")
+        return redirect('home')
+
+
 def show_potion(request):
     if request.user.is_authenticated:
         potions = Potion.objects.all()
         return render(request, 'show_potions.html', {'potions': potions})
+    else:
+        messages.success(request, "You must be logged in")
+        return redirect('home')
+
+
+def show_ingredient(request):
+    if request.user.is_authenticated:
+        ingredients = Ingredient.objects.all()
+        return render(request, 'show_ingredients.html', {'ingredients': ingredients})
     else:
         messages.success(request, "You must be logged in")
         return redirect('home')
