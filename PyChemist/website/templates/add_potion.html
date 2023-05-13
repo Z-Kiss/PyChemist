@@ -6,8 +6,8 @@
         <form method="POST" action="{% url 'add_potion' %}">
             {% csrf_token %}
             {{ form.as_div }}
+            <br>
             <button type="submit" class="btn btn-secondary">Add potion</button>
-
         </form>
     </div>
 {% endblock %}
