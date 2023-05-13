@@ -90,13 +90,7 @@ def show_potion(request):
         return redirect('home')
 
 
-def show_ingredient(request):
-    if request.user.is_authenticated:
-        ingredients = Ingredient.objects.all()
-        return render(request, 'show_ingredients.html', {'ingredients': ingredients})
-    else:
-        messages.success(request, "You must be logged in")
-        return redirect('home')
+
 
 
 def brew_potion(request, potion_id):
