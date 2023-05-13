@@ -56,17 +56,20 @@ def add_potion(request):
                 potion = Potion(name=potion_name, user=request.user)
                 potion.save()
                 messages.success(request, "Potion is created")
-                return redirect('home')
+                return redirect('show_potion')
         return render(request, 'add_potion.html', {'form': form})
     else:
         messages.success(request, "You must be logged in")
-    return redirect('home')
+        return redirect('home')
 
 
 def show_potion(request):
     if request.user.is_authenticated:
         potions = Potion.objects.all()
         return render(request, 'show_potions.html', {'potions': potions})
+    else:
+        messages.success(request, "You must be logged in")
+        return redirect('home')
 
 
 def brew_potion(request, potion_id):
