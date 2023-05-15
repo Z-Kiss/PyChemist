@@ -56,7 +56,7 @@ class Recipe(models.Model):
 class Potion(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
-    original = models.BooleanField(default=False)
+    original = models.BooleanField(default=None, blank=True, null=True)
     user = models.ForeignKey(
         User,
         on_delete=models.RESTRICT,
