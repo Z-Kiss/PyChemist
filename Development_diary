@@ -45,3 +45,14 @@ with the same ingredients or not. If it is not, then you can name the recipie an
 It's not finished yet because I need to research more about how to pass collections, but i'm on the right track. I think so at least. :D
 
 At this moment this "Original" attribute doesn't have any meaning but later when I will implement the Scoreing system will be helpful
+
+***Day Third***
+
+I fixed some problems in the logic.
+At this moment everything working as intended on the backend.
+I know the design "ugly" but its representative.
+
+Next step will be refactore and learn more about Django framework
+
+
+
