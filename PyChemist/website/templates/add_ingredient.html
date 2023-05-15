@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="col-md-6 offset-md-3">
-        <h1>Add potion</h1>
-        <form method="POST" action="{% url 'add_potion' %}">
+
+        <h1>Add Ingredient</h1>
+        <form method="POST" action="{% url 'add_ingredient' %}">
             {% csrf_token %}
             {{ form.as_div }}
             <br>
-            <button type="submit" class="btn btn-secondary">Add potion</button>
+            <button type="submit" class="btn btn-secondary">Add Ingredient</button>
         </form>
     </div>
 {% endblock %}

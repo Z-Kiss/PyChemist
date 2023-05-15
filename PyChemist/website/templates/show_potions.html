@@ -10,6 +10,7 @@
                 <th scope="col" >Original</th>
                 <th scope="col" >Ingredients</th>
                 <th scope="col" >Status</th>
+                <th scope="col">Recipe Name</th>
             </tr>
             </thead>
             <tbody>
@@ -18,9 +19,11 @@
                     <td>{{ potion.name }}</td>
                     <td>{{ potion.user }}</td>
                     <td>
-                        {% if potions.original == true %}
+                        {% if potion.original == None %}
+                            Brewing...
+                        {% elif potion.original == True %}
                             Yes
-                        {% else %}
+                        {% elif potion.original == False %}
                             No
                         {% endif %}
                     </td>
@@ -30,12 +33,23 @@
                         {% endfor %}
                     </td>
                     <td>
-                        {% if potions.ingredients.all.count < 5 or not potion.ingredients.all %}
+                        {% if not potion.ingredients.all %}
                             <a class="nav-link " aria-current="page" href="{% url 'brew_potion' potion_id=potion.id %}">
                                 Start to Brew
                             </a>
+                        {% elif potion.ingredients.all.count < 5 %}
+                            <a class="nav-link " aria-current="page" href="{% url 'brew_potion' potion_id=potion.id %}">
+                                Continue to Brewing
+                            </a>
                         {% else %}
                             Already Brewed
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if potion.recipe %}
+                            {{ potion.recipe.name }}
+                            {% else %}
+                            {{ Unknown }}
                         {% endif %}
                     </td>
                 </tr>

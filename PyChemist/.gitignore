@@ -1,7 +1,0 @@
-.idea/*
-../.idea/*
-venv/*
-website/migrations
-PyChemist.iml
-*/__pycache__/*
-out/

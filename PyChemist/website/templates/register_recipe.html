@@ -3,7 +3,7 @@
     <div class="col-md-6 offset-md-3">
 
         <h1>Add potion</h1>
-        <form method="POST" action="{% url 'register_recipe' ingredients=ingredients %}">
+        <form method="POST" action="{% url 'register_recipe' potion_id=potion_id %}">
             {% csrf_token %}
             {{ form.as_div }}
             <div class="d-flex flex-row justify-content-between bg-secondary-subtle">
