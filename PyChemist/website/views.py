@@ -74,7 +74,7 @@ def add_ingredient(request):
             ingredient = Ingredient(name=ingredient_name)
             ingredient.save()
             messages.success(request, "Ingredient is added")
-            return redirect('home')
+            return redirect('add_ingredient')
     else:
         return render(request, 'add_ingredient.html', {'form': form})
 
@@ -115,6 +115,7 @@ def add_ingredient_to_potion(request, potion_id, ingredient_id):
                 if element_counter[recipe] == 5:
                     matching_recipe = recipe
             if matching_recipe:
+                potion.original = False
                 potion.recipe = matching_recipe
                 potion.save()
                 return redirect('show_potion')
