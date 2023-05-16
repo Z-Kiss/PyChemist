@@ -71,16 +71,25 @@ After you are done, you can start the application
     - You can add Ingredients to the Potion until reaching 5 of it.
       When you reach 5 ingredient your potion is done.
       
+##### _**Register Recipe**_    
+      
+    - After the fifth ingredient if there is a Recipe with the same ingredient,
+      if it is, it will connect the Recipe to the potion. Otherwise if there is no Recipe
+      that contains the same ingredients, the Recipe shown and you can name it.
+      
+##### _**Original Potions**_
+
+    - If there was Recipe that had the same Ingredients as the Potion, then the potion Original field became False.
+      Otherwise it will became True showing that Potion was the first created by those Ingredients
       
     
 ### **Future plans**
-
-  - Implememnt Feature about Recipes:
-    After adding the fifth ingredient, the app will check
-    if there is any Recipe with the same ingredients(order not count atm)
-    If there is none, your potion will be a Original one and you can name the Recipe
-  - Add Ingridients
-  - Add scoring system, to feel the accomplishment :D
+    
+  - Deepen "Game" logic
+        - Ingredients will have cost
+        - Random Ingredient spawn by "Trader"
+        - You can Sell Potions
+  - Add scoring system, to feel the accomplishment
   - Better design
   - Optimalize
   - Make code cleaner
