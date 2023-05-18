@@ -38,6 +38,10 @@ For the application to be able to work you need to create a database
    You need to use the password that you gave at the installation
    - After you logged in you need to enter the command "create database pychemist"
 
+After the database created you need to fill out the config.env file
+    - In the config.env file (located in PyChemist directory)
+    you need to fill out USER_PASSWORD variable with the password of the "postgres" user
+
 At this state of the application
 you need to migrate the database relations that we defined in the model.py
     - From the PyChemist directory enter this commands
