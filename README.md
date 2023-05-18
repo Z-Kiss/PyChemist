@@ -23,7 +23,7 @@ My goal was with this project to learn more about Python and Django Framework.
 ### **Getting Started**
 
 Before you start, you need to create a Virtual Environment
-    - From the PyChemist directory run: "python venv venv"
+    - From the PyChemist directory run: "python -m venv venv"
   
 Then you need to activate it
     - Enter the command "source venv/bin/activate" if you're on a Unix-based system
