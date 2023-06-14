@@ -22,34 +22,49 @@ My goal was with this project to learn more about Python and Django Framework.
 
 ### **Getting Started**
 
-Before you start, you need to create a Virtual Environment
-    - From the PyChemist directory run: "python -m venv venv"
+1 Before you start, you need to create a Virtual Environment
+    - From the PyChemist directory run: 
+```
+python -m venv venv
+```
   
-Then you need to activate it
-    - Enter the command "source venv/bin/activate" if you're on a Unix-based system
-    or "venv\Scripts\activate.bat" if you're on a Windows system.
+2 Then you need to activate it enter the command
+    
+if you're on a Unix-based system
+```
+source venv/bin/activate
+``` 
+if you're on a Windows system.    
+```
+venv\Scripts\activate.bat
+```
   
-Then you need to install the requirements
-    -  Enter the command "pip install -r requirements.txt"
- 
-For the application to be able to work you need to create a database
-   - After installed the Postgresql you need to log in
-   - Open a Terminal and enter the command "psql -U postgres"
-   You need to use the password that you gave at the installation
-   - After you logged in you need to enter the command "create database pychemist"
+3 Then you need to install the requirements
+    -  Enter the command 
+```
+pip install -r requirements.txt
+```
 
-After the database created you need to fill out the config.env file
+4 fter the database created you need to fill out the config.env file
+
     - In the config.env file (located in PyChemist directory)
     you need to fill out USER_PASSWORD variable with the password of the "postgres" user
 
-At this state of the application
+5 At this state of the application
 you need to migrate the database relations that we defined in the model.py
     - From the PyChemist directory enter this commands
-    - python manage.py makemigrations
-    - python manage.py migrate
-
-After you are done, you can start the application
-    - Enter the command "python manage.py runserver"
+    
+```
+python manage.py makemigrations
+```
+```
+python manage.py migrate
+```
+6 After you are done, you can start the application
+    - Enter the command 
+```
+python manage.py runserver
+```
 
 
    
